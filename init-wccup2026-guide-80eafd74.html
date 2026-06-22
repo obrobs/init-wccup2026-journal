@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>世界杯 · 赛事信息站 · init-wccup2026</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f4f6f9;
+      color: #2c3e50;
+      line-height: 1.6;
+      padding: 2rem 1.25rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Hero 区域 */
+    .hero {
+      text-align: center;
+      padding: 3.5rem 1rem 2.2rem;
+      background: linear-gradient(145deg, #ffffff, #fafbfc);
+      border-radius: 24px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #1e2a3a;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(140deg, #1f3a5f, #2d4f7c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 1rem auto 0;
+      font-size: 1.15rem;
+      color: #4a5b6e;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.6rem 2rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03), 0 1px 4px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e7ecf3;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(0, 20, 40, 0.06);
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      color: #1f2c3d;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card h2 .emoji-badge {
+      display: inline-block;
+      background: #eef2f7;
+      border-radius: 40px;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.9rem;
+      margin-left: 0.2rem;
+      color: #2f4a6b;
+    }
+
+    .card p, .card li {
+      color: #3d5066;
+      font-size: 1rem;
+    }
+
+    .card ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+      list-style: none;
+    }
+
+    .card li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .card li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #3f6a9b;
+    }
+
+    .audience-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+    }
+
+    .audience-tags span {
+      background: #eef3fa;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      border: 1px solid #dce4ef;
+      color: #2c4b6e;
+    }
+
+    /* 用途卡片全宽 */
+    .card-wide {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      align-items: flex-start;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.8rem 2rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      border: 1px solid #e7ecf3;
+    }
+
+    .card-wide > div {
+      flex: 1 1 200px;
+    }
+
+    .card-wide h3 {
+      font-weight: 500;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      color: #1d2d41;
+    }
+
+    .card-wide p {
+      color: #41546b;
+    }
+
+    /* 段落卡片 (自然链接) */
+    .link-section {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      border: 1px solid #e7ecf3;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      margin-bottom: 2.5rem;
+    }
+
+    .link-section h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: #1f2c3d;
+    }
+
+    .link-section p {
+      color: #3d5066;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .link-section a {
+      color: #1f4b7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .link-section a:hover {
+      border-bottom-color: #1f4b7a;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.4rem 2rem 1.8rem;
+      border: 1px solid #e7ecf3;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      margin-bottom: 2.5rem;
+    }
+
+    .faq-mini h3 {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      color: #1f2c3d;
+    }
+
+    .faq-item {
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+      margin-bottom: 0.65rem;
+      color: #3d5066;
+    }
+
+    .faq-item .q {
+      font-weight: 500;
+      min-width: 5rem;
+      color: #2f4a6b;
+    }
+
+    .faq-item .a {
+      color: #4d627b;
+    }
+
+    /* 尾部 */
+    .footer-note {
+      text-align: center;
+      padding: 1.8rem 0 0.5rem;
+      font-size: 0.9rem;
+      color: #7b8ca3;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 740px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .card-wide {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .link-section, .faq-mini {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero 主视觉 -->
+  <div class="hero">
+    <h1><span>世界杯</span> · 赛事信息聚合</h1>
+    <p>围绕国际足联世界杯赛事，汇集赛程、球队与历史数据的基础参考站。内容基于公开信息整理，力求客观与清晰。</p>
+  </div>
+
+  <!-- 两列卡片：介绍 + 适合人群 -->
+  <div class="card-grid">
+    <div class="card">
+      <h2>关于本站 <span class="emoji-badge">⚽</span></h2>
+      <p><strong>init-wccup2026.com</strong> 是一个专注于世界杯赛事信息整理的静态站点。页面内容主要涵盖历届世界杯决赛圈数据、参赛队伍沿革、举办国背景以及赛制说明。</p>
+      <p style="margin-top: 0.7rem;">本站由体育信息爱好者维护，所有资料均引用自官方或公开可靠来源。我们不对任何第三方机构或博彩平台背书。</p>
+    </div>
+
+    <div class="card">
+      <h2>适合人群 <span class="emoji-badge">👥</span></h2>
+      <p>以下类型的读者可能会对该站内容感兴趣：</p>
+      <div class="audience-tags">
+        <span>赛事研究者</span>
+        <span>足球历史爱好者</span>
+        <span>数据整理者</span>
+        <span>学生 / 编辑</span>
+        <span>一般球迷</span>
+      </div>
+      <p style="margin-top: 1rem;">无论你是想快速查阅某届赛事的基本信息，还是系统梳理世界杯发展脉络，本站提供基础索引。</p>
+    </div>
+  </div>
+
+  <!-- 用途卡片 (全宽) -->
+  <div class="card-wide">
+    <div>
+      <h3>🗂️ 资料卡片</h3>
+      <p>每届世界杯的举办时间、决赛场地、冠军与亚军、最佳射手等核心数据均以结构化卡片呈现，方便对比与引用。</p>
+    </div>
+    <div>
+      <h3>📆 赛程与场馆</h3>
+      <p>2026年美加墨世界杯相关筹备信息逐步更新，包括主办城市、体育场容量及分组抽签规则等。</p>
+    </div>
+    <div>
+      <h3>📚 阅读方式</h3>
+      <p>所有页面均为纯静态 HTML，加载快、排版简洁，适合在手机与桌面端无干扰阅读。</p>
+    </div>
+  </div>
+
+  <!-- 自然链接段落 -->
+  <div class="link-section">
+    <h2>关于世界杯的信息源</h2>
+    <p>如果你正在寻找最直接的赛事背景与历史记录，不妨将本站作为起点。无论是讨论夺冠次数、经典决赛复盘，还是想了解不同主办国的文化背景，<a href="https://init-wccup2026.com">世界杯</a>这个域名下的内容都经过基础核验，以降低信息错讹可能。</p>
+    <p>对于深度数据需求，我们推荐配合 FIFA 官方统计或 reputable 体育数据库交叉参考。本网站保持独立编辑，不追踪用户行为，也不展示商业广告。</p>
+  </div>
+
+  <!-- FAQ 摘要卡片 -->
+  <div class="faq-mini">
+    <h3>❓ 常见问题摘要</h3>
+    <div class="faq-item">
+      <span class="q">Q：</span>
+      <span class="a">网站更新频率如何？—— 赛期前后每月更新，非赛期每季度补充历史数据。</span>
+    </div>
+    <div class="faq-item">
+      <span class="q">Q：</span>
+      <span class="a">内容授权？—— 本站采用 CC BY 4.0，欢迎非商业转载，需注明来源。</span>
+    </div>
+    <div class="faq-item">
+      <span class="q">Q：</span>
+      <span class="a">是否提供下载？—— 所有数据均直接展示在页面中，不提供离线打包。</span>
+    </div>
+    <div class="faq-item">
+      <span class="q">Q：</span>
+      <span class="a">为何强调“可信说明”？—— 鉴于网络信息混杂，我们尽量标注每条数据的出处状态。</span>
+    </div>
+  </div>
+
+  <!-- 脚注 -->
+  <div class="footer-note">
+    页面内容仅供参考 · 足球世界永远不乏新故事
+  </div>
+
+</div>
+</body>
+</html>
